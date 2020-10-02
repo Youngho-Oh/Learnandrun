@@ -29,6 +29,7 @@ h1 = in_layer1.forward(c1)
 h = (h0 + h1) * 0.5
 s = out_layer.forward(h)
 
+# print result
 print s
 
 #print a
