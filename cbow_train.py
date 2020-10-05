@@ -8,8 +8,9 @@ from lib import layer as la
 from lib import loss as lo
 from lib import layer_naive as ln
 from lib import optimizer as op
-from lib import cbow as cw
-from corpus import corpus as cp
+from lib import cbow
+from lib import util
+from corpus import corpus
 
 
 window_size = 1
@@ -18,11 +19,11 @@ batch_size = 3
 max_epoch = 1000
 
 text = 'You say goodbye and I say hello'
-corpus, word_to_id, id_to_word = cp.preprocess(text)
+corpus, word_to_id, id_to_word = corpus.preprocess(text)
 
 vocab_size = len(word_to_id)
 #TODO
-#contexts, target = create_contexts_target(corpus, window_size)
+contexts, target = util.create_contexts_target(corpus, window_size)
 #target = convert_one_hot(target, vocab_size)
 #contexts = covert_one_hot(contexts, vocab_size)
 

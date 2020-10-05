@@ -53,6 +53,12 @@ class arange:
     elif len(args) > 2:
       self._make_demension(args[1:])
 
+  def _check_lst_demension(self, lst):
+    if type(lst[0]) == type([]):
+        return [len(lst)]+self._check_lst_demension(lst[0])
+    else :
+        return [len(lst)]
+
   def __init__(self, n):
     self._origin_list = []
     self._demension = []
@@ -66,9 +72,13 @@ class arange:
         self._make_demension(1,n)
         #print "ddd"
     elif type(n) == type([]) :
-      #TODO
       self._origin_list = copy.deepcopy(n)
-      self._make_demension(1,len(n))
+      demension = self._check_lst_demension(n)
+      if len(demension) == 1 :
+          demension = [1] + demension
+      #print demension
+      self._demension = demension
+      self._check_demension()
       #print len(n)
 
   #def __repr__(self):
@@ -99,6 +109,15 @@ class arange:
 
   def get_origin_list(self):
     return self._origin_list
+
+  def set_demension(self, demension):
+    self._demension = demension
+
+  def set_origin_list(self, lst):
+    self._origin_list = lst
+
+  def set_ndim(self, ndim):
+    self._ndim = ndim
 
   def _transpose(self, demension, pos):
     axis_1st = demension[0]

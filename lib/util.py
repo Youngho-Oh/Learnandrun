@@ -43,3 +43,18 @@ def create_co_matrix(corpus, vocab_size, window_size=1):
         co_matrix.get_origin_list()[word_id][right_word_id] += 1
 
   return co_matrix
+
+def create_contexts_target(corpus, window_size=1):
+    corpus_lst = corpus.get_origin_list()
+    target = corpus_lst[window_size:-window_size]
+    contexts = []
+
+    for idx in range(window_size, len(corpus_lst)-window_size):
+        cs = []
+        for t in range(-window_size, window_size+1):
+            if t == 0 :
+                continue
+            cs.append(corpus_lst[idx+1])
+        contexts.append(cs)
+
+    return np.arange(contexts), np.arange(target) 
